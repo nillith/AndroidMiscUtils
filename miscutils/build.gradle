@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'miscutils'
+
+    publishedGroupId = 'com.nillith'
+    libraryName = 'MiscUtils'
+    artifact = 'miscutils'
+
+    libraryDescription = 'Android Utils for context and thread.'
+
+    siteUrl = 'https://github.com/nillith/AndroidMiscUtils'
+    gitUrl = 'https://github.com/nillith/AndroidMiscUtils.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'nillith'
+    developerName = 'nillith'
+    developerEmail = 'nillith@outlook.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
+apply from: '../install.gradle'
+apply from: '../bintray.gradle'
