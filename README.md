@@ -1,6 +1,14 @@
 # AndroidMiscUtils
 Android utils for context and thread.
 
+### Add Gradle Dependencies
+
+```groovy
+dependencies {
+    compile 'com.nillith:miscutils:0.1.0'
+}
+```
+
 ### How to use
 ###1 Init
 Init MiscUtils in you Application class.
@@ -32,6 +40,7 @@ Add the above class to AndroidManifest.xml
      MiscUtils.init(Context applicationContext)
      MiscUtils.getApplicationContext()
      MiscUtils.isUiThread()
+     MiscUtils.isUiThread(Thread thread)
      MiscUtils.runOnUiThread(Runnable runnable)
      MiscUtils.runOnUiThread(Runnable runnable, long delayMillis)
      MiscUtils.runSeriallyOnBackgroundThread(Runnable runnable)
