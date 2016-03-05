@@ -5,7 +5,7 @@ Android utils for context and thread.
 
 ```groovy
 dependencies {
-    compile 'com.nillith:miscutils:0.1.0'
+    compile 'com.nillith:miscutils:0.2.0'
 }
 ```
 
@@ -50,4 +50,17 @@ Add the above class to AndroidManifest.xml
      MiscUtils.showToast(@StringRes int resId)
      MiscUtils.showToast(CharSequence message, int duration)
      MiscUtils.showToast(@StringRes int resId, int duration)
+     MiscUtils.inflateLayout(View view, @LayoutRes int resId)
+     MiscUtils.inflateLayout(Activity activity, @LayoutRes int resId)
+     MiscUtils.inflateLayout(Window window, @LayoutRes int resId)
+     MiscUtils.inflateLayout(Dialog dialog, @LayoutRes int resId)
+     MiscUtils.inflateLayout(@LayoutRes int resId)
+     MiscUtils.inflateLayout(Context context, @LayoutRes int resId)
+     MiscUtils.attachLayout(ViewGroup viewGroup, @LayoutRes int resId)
+```
+
+####2.3 Class
+```java
+     SimplePagerAdapter
+     MatchParentDialog
 ```

@@ -1,14 +1,21 @@
 package com.nillith.android.common;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.util.concurrent.Executors;
@@ -37,7 +44,7 @@ public class MiscUtils {
     }
 
     public static Context getApplicationContext() {
-        if (null == applicationContext){
+        if (null == applicationContext) {
             throw new IllegalStateException("MiscUtils not initialized! Add MiscUtils.init(getApplicationContext()); in your Application's onCreate callback.");
         }
         return applicationContext;
@@ -101,4 +108,31 @@ public class MiscUtils {
         });
     }
 
+    public static View inflateLayout(View view, @LayoutRes int resId) {
+        return LayoutInflater.from(view.getContext()).inflate(resId, view instanceof ViewGroup ? (ViewGroup) view : null, false);
+    }
+
+    public static View inflateLayout(Activity activity, @LayoutRes int resId) {
+        return LayoutInflater.from(activity).inflate(resId, (ViewGroup) activity.getWindow().getDecorView(), false);
+    }
+
+    public static View inflateLayout(Window window, @LayoutRes int resId) {
+        return LayoutInflater.from(window.getContext()).inflate(resId, (ViewGroup) window.getDecorView(), false);
+    }
+
+    public static View inflateLayout(Dialog dialog, @LayoutRes int resId) {
+        return inflateLayout(dialog.getWindow(), resId);
+    }
+
+    public static View inflateLayout(@LayoutRes int resId) {
+        return inflateLayout(getApplicationContext(), resId);
+    }
+
+    public static View inflateLayout(Context context, @LayoutRes int resId) {
+        return LayoutInflater.from(context).inflate(resId, new FrameLayout(context), false);
+    }
+
+    public static View attachLayout(ViewGroup viewGroup, @LayoutRes int resId) {
+        return LayoutInflater.from(viewGroup.getContext()).inflate(resId, viewGroup, true);
+    }
 }
