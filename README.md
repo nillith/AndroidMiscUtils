@@ -5,7 +5,7 @@ Android utils for context and thread.
 
 ```groovy
 dependencies {
-    compile 'com.nillith:miscutils:0.2.0'
+    compile 'com.nillith:miscutils:0.2.1'
 }
 ```
 
@@ -37,7 +37,7 @@ Add the above class to AndroidManifest.xml
 
 ####2.2 Static Methods
 ```java
-     MiscUtils.init(Context applicationContext)
+     void MiscUtils.init(Context applicationContext)
      MiscUtils.getApplicationContext()
      MiscUtils.isUiThread()
      MiscUtils.isUiThread(Thread thread)

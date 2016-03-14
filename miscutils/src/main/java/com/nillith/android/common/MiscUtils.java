@@ -21,18 +21,27 @@ import android.widget.Toast;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Nil on 2016/2/28.
  */
+
 public class MiscUtils {
     private MiscUtils() {
     }
 
     public static final Handler MAIN_HANDLER = new Handler();
-    public static final ScheduledExecutorService SCHEDULED_EXECUTOR =
-            Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
+    public static final ScheduledExecutorService SCHEDULED_EXECUTOR;
+
+    static {
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors());
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            executor.setRemoveOnCancelPolicy(true);
+        }
+        SCHEDULED_EXECUTOR = Executors.unconfigurableScheduledExecutorService(executor);
+    }
 
     private static Context applicationContext;
     private static final Thread UI_THREAD = Thread.currentThread();
