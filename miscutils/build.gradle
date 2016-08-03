@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/nillith/AndroidMiscUtils'
     gitUrl = 'https://github.com/nillith/AndroidMiscUtils.git'
 
-    libraryVersion = '0.2.1'
+    libraryVersion = '0.2.2'
 
     developerId = 'nillith'
     developerName = 'nillith'

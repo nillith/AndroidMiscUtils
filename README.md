@@ -5,7 +5,7 @@ Android utils for context and thread.
 
 ```groovy
 dependencies {
-    compile 'com.nillith:miscutils:0.2.1'
+    compile 'com.nillith:miscutils:0.2.2'
 }
 ```
 

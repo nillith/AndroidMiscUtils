@@ -18,15 +18,13 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Nil on 2016/2/28.
- */
 
 public class MiscUtils {
     private MiscUtils() {
@@ -44,8 +42,7 @@ public class MiscUtils {
     }
 
     private static Context applicationContext;
-    private static final Thread UI_THREAD = Thread.currentThread();
-
+    private static final WeakReference<Thread> UI_THREAD = new WeakReference<>(Thread.currentThread());
 
     @MainThread
     public static void init(Context applicationContext) {
@@ -64,7 +61,7 @@ public class MiscUtils {
     }
 
     public static boolean isUiThread(Thread thread) {
-        return UI_THREAD == thread;
+        return UI_THREAD.get() == thread;
     }
 
     public static void runOnUiThread(@NonNull Runnable runnable) {
@@ -74,7 +71,6 @@ public class MiscUtils {
             MAIN_HANDLER.post(runnable);
         }
     }
-
 
     public static void runOnUiThread(@NonNull Runnable runnable, long delayMillis) {
         MAIN_HANDLER.postDelayed(runnable, delayMillis);
@@ -104,7 +100,7 @@ public class MiscUtils {
     public static void showToast(final CharSequence message, final int duration) {
         runOnUiThread(new Runnable() {
             public void run() {
-                Toast.makeText(MiscUtils.applicationContext, message, duration).show();
+                Toast.makeText(getApplicationContext(), message, duration).show();
             }
         });
     }
@@ -112,13 +108,13 @@ public class MiscUtils {
     public static void showToast(@StringRes final int resId, final int duration) {
         runOnUiThread(new Runnable() {
             public void run() {
-                Toast.makeText(MiscUtils.applicationContext, resId, duration).show();
+                Toast.makeText(getApplicationContext(), resId, duration).show();
             }
         });
     }
 
     public static View inflateLayout(View view, @LayoutRes int resId) {
-        return LayoutInflater.from(view.getContext()).inflate(resId, view instanceof ViewGroup ? (ViewGroup) view : null, false);
+        return LayoutInflater.from(view.getContext()).inflate(resId, view instanceof ViewGroup ? (ViewGroup) view : new FrameLayout(view.getContext()), false);
     }
 
     public static View inflateLayout(Activity activity, @LayoutRes int resId) {
