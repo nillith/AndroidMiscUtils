@@ -64,3 +64,8 @@ Add the above class to AndroidManifest.xml
      SimplePagerAdapter
      MatchParentDialog
 ```
+
+
+## License
+
+Nillith, 2016. Licensed under an [Apache-2](LICENSE.txt) license.
